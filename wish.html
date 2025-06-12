@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Wish ♡</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #fff0f5;
+      font-family: 'Segoe UI', cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    #start-screen, #wish-screen {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s ease;
+    }
+
+    #wish-screen {
+      opacity: 0;
+      pointer-events: none;
+      background: linear-gradient(to top right, #ffe0e9, #ffe8e4);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #ff4d88;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    h1 {
+      font-size: 42px;
+      color: #d6336c;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease;
+    }
+
+    .quote {
+      font-size: 24px;
+      line-height: 1.8;
+      color: #5c2a5d;
+      white-space: pre-line;
+      animation: fadeInUp 2.5s ease;
+    }
+
+    .from {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #b73c75;
+      opacity: 0;
+      animation: fadeIn 3s ease 4s forwards;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 20px;
+      color: gold;
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.5);}
+      50% { opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="bg-music" src="https://cdn.discordapp.com/attachments/1379456067595010209/1382629959247597630/SpotiDownloader.com_-_Ve_Haaniyaan_-_Danny.mp3?ex=684bd9fe&is=684a887e&hm=e4df5781f798004c25ed2ae09f43c063e77286fc5d8997d7a7f6e7f40802daf7&"></audio>
+
+  <div id="start-screen">
+    <h1>🎂 A Special Message 🎂</h1>
+    <p>Click to receive your birthday surprise ♡</p>
+    <button onclick="startAnimation()">Show Wish</button>
+  </div>
+
+  <div id="wish-screen">
+    <h1>💖 Happy Birthday Yaar 💖</h1>
+    <p class="quote">
+      Happy bdayy yaarr 🎉💕  
+      Thanku yaar ✨🥰  
+      To be with meeee 💝  
+      Yarr......  
+      Thankuuu 🫂💞✨💖😍  
+    </p>
+    <p class="from">From: Preet ♡</p>
+  </div>
+
+  <script>
+    function startAnimation() {
+      const music = document.getElementById("bg-music");
+      music.play();
+
+      const hearts = [];
+      const sparkles = [];
+
+      // Falling hearts
+      for (let i = 0; i < 35; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "♡";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDelay = Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        hearts.push(heart);
+      }
+
+      // Sparkles
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.textContent = "✨";
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.top = 100 + Math.random() * (window.innerHeight - 200) + "px";
+        sparkle.style.animationDelay = (Math.random() * 3) + "s";
+        document.getElementById("wish-screen").appendChild(sparkle);
+        sparkles.push(sparkle);
+      }
+
+      // Transition
+      document.getElementById("start-screen").style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById("start-screen").style.display = "none";
+        document.getElementById("wish-screen").style.opacity = 1;
+        document.getElementById("wish-screen").style.pointerEvents = "auto";
+        setTimeout(() => hearts.forEach(h => h.remove()), 5000);
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
